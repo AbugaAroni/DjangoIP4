@@ -54,3 +54,31 @@ create_business()
 delete_business()
 find_business(business_id)
 update_business()
+
+
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user=request.User
+    actual_user = user.objects.get(name=current_user)
+
+    try:
+        userposts = posts.objects.filter(Q(user_name=actual_user))
+    except posts.DoesNotExist:
+        userposts = ""
+    try:
+        userhood = neighborhood.objects.get(username=current_user)
+    except Profile.DoesNotExist:
+        profiles = ""
+
+    if request.method == 'POST':
+        form = NewUserForm(request.POST, request.FILES)
+        if form.is_valid():
+            newuser = form.save(commit=False)
+            newhood.admin = current_user
+            newhood.save()
+            newhood.update_occupants(newhood.id)
+        return redirect(profile)
+
+    else:
+        form = NewNeighbourhoodForm()
+    return render(request, 'accounts/profile.html', {"form": form, "userposts":userposts,  "actual_user":actual_user})

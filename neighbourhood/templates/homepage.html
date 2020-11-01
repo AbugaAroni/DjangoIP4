@@ -7,36 +7,24 @@
 
   <!-- Looping through model   -->
   <div class="row">
-    {% for project_item in projects %}
+    {% for p in posts %}
       <div class="col-xs-8 col-sm-12 col-md-5 col-lg-5" style="padding: 10px; margin: 30px; border-bottom-style: double; height: 500px; ">
         <!-- displaying title -->
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h2 class="text-center"> {{ project_item.title }}</h2>
+            <h2 class="text-center"> {{ p.title }}</h2>
           </div>
           <div class="panel-body">
           <div>
             <div class = "row">
               <div class = "col-md-12">
-                <p> {{ project_item.project_details}}  </p>
+                <p> {{ p.article}}  </p>
                   <hr>
               </div>
             </div>
               <div class = "row">
                 <div class = "col-md-12">
-                  <p> <a href="/viewproject/{{project_item.id}}">View more and rate this project</a>  </p>
-                    <hr>
-                </div>
-              </div>
-              <div class = "row">
-                <div class = "col-md-12">
-                    <p> <span style="font-weight: bold;"> Rating: </span>{{ project_item.score }}/10</p>
-                    <hr>
-                </div>
-              </div>
-              <div class = "row">
-                <div class = "col-md-12">
-                    <p> <span style="font-weight: bold;"> More from the Author: </span><a href="authorprofile/{{project_item.creator.id}}">{{ project_item.creator.username }}</a></p>
+                    <p> <span style="font-weight: bold;">Author: </span> {{p.user.username}}</p>
                     <hr>
                 </div>
               </div>
