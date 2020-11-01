@@ -3,6 +3,9 @@ to do,
 create models,
 create user Sign,
 create my profile
+  add Neighrbourhood
+  add your profile
+  add forms for Neighrbourhood and user
 
 Pages
 
