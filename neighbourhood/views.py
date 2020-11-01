@@ -63,14 +63,20 @@ def new_business(request):
     current_user=request.user
     neighbourhoods_avail = neighbourhood.objects.all()
 
+    try:
+        actual_user = user.objects.get(name=current_user)
+    except user.DoesNotExist:
+        actual_user = ""
+
     if request.method == 'POST':
-        form = NewNeighbourhoodForm(request.POST, request.FILES)
+        form = NewBusinessForm(request.POST, request.FILES)
         if form.is_valid():
             newhood = form.save(commit=False)
-            newhood.admin = current_user
+            newhood.user_owner = actual_user
             newhood.save()
-        return redirect(profile)
+        #redirect to the specific neighbourhood businesses    
+        return redirect(new_business)
 
     else:
-        form = NewNeighbourhoodForm()
-    return render(request, 'new_neighbourhood.html', {"form": form})
+        form = NewBusinessForm()
+    return render(request, 'new_business.html', {"form": form, "actual_user": actual_user, "neighbourhoods_avail":neighbourhoods_avail})

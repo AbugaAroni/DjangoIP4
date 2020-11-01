@@ -1,5 +1,5 @@
 from django import forms
-from .models import neighbourhood, user
+from .models import neighbourhood, user, business
 
 class NewNeighbourhoodForm(forms.ModelForm):
     class Meta:
@@ -11,7 +11,7 @@ class NewUserForm(forms.ModelForm):
         model = user
         exclude = ['name']
 
-class NewBusinessForm(forms.Modelform):
+class NewBusinessForm(forms.ModelForm):
     class Meta:
-        model =business
-        exclude = ['user_owner']        
+        model = business
+        exclude = ['user_owner']
