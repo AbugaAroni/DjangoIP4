@@ -15,6 +15,8 @@ def home(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user=request.user
+    neighbourhoods_avail = neighbourhood.objects.all()
+
     try:
         actual_user = user.objects.get(name=current_user)
     except user.DoesNotExist:
@@ -37,7 +39,7 @@ def profile(request):
 
     else:
         form = NewUserForm()
-    return render(request, 'accounts/profile.html', {"form": form, "userposts":userposts,  "actual_user":actual_user})
+    return render(request, 'accounts/profile.html', {"form": form, "userposts":userposts,  "actual_user":actual_user, "neighbourhoods_avail":neighbourhoods_avail})
 
 #add a new neighbourhood
 @login_required(login_url='/accounts/login/')

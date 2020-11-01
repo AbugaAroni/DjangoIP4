@@ -16,15 +16,21 @@
           <h3 class="text-center">Your profile</h3>
         </div>
         {% if actual_user == ""%}
-        <div class="panel-body">
-                  <p> You have not yet submitted a profile and added your neighborhood, please complete the form below. </p>
-          <form  action="{%url 'user_profile'%}" method="post" enctype="multipart/form-data">
-            {%csrf_token%}
+          {% if not neighbourhoods_avail %}
+          <div class="panel-body">
+                    <p>No neighbourhoods available yet, please <a href="{%url 'add_neighbourhood'%}">add your neighrbourhood</a> to the list </p>
+              </div>
+              {%else%}
+                <div class="panel-body">
+                          <p> You have not yet submitted a profile and added your neighborhood, please complete the form below. </p>
+                  <form  action="{%url 'user_profile'%}" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
 
-            {% bootstrap_form form%}
-            <input type="submit" class="btn btn-success btn-lg" value="Post">
-          </form>
-            </div>
+                    {% bootstrap_form form%}
+                    <input type="submit" class="btn btn-success btn-lg" value="Post">
+                  </form>
+                    </div>
+              {% endif %}
         {% else %}
         <div class="panel-body">
           <div class="row">
