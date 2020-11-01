@@ -11,8 +11,23 @@ class neighbourhood(models.Model):
     def __str__(self):
         return self.name
 
-    def save_Neighbourhood(self):
+    def save_neighbourhood(self):
         self.save()
 
-    def delete_Neighbourhood(self):
+    def delete_neighbourhood(self):
         self.delete()
+
+    @classmethod
+    def find_neighbourhood(cls,hoodid):
+        hood = cls.objects.get(id = hoodid)
+        return hood
+
+    @classmethod
+    def update_occupants(cls,hoodid):
+        occupationcount = cls.objects.get(id=hoodid)
+        newcount = occupationcount.no_occupants + 1
+        cls.objects.filter(id = hoodid).update(no_occupants = newcount)
+
+    def update_neighborhood(self):
+        name = self.name
+        self.name = name
