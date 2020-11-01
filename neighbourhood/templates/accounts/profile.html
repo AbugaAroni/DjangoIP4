@@ -1,0 +1,104 @@
+{%extends "django_registration/base.html"%}
+{% load bootstrap3 %}
+{% block content %}
+  {{form.media}}
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      {% if form.errors %}
+        <p> Some Information Might be Incorrect </p>
+      {% endif %}
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3 class="text-center">Your profile</h3>
+        </div>
+        {% if profiles == ""%}
+        <div class="panel-body">
+                  <p> You have not yet submitted a profile, please add one below. </p>
+          <form  action="{%url 'user_profile'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-success btn-lg" value="Post">
+          </form>
+            </div>
+        {% else %}
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p><span style="font-weight: bold;"> Bio: </span> {{profiles.bio}} </p>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <p><span style="font-weight: bold;"> Contact info: </span> {{profiles.contactinfo}}</p>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <img src="{{profiles.user_image.url}}" class="img-responsive" alt="Image">
+            </div>
+          </div>
+          </div>
+          {% endif %}
+    </div>
+    <!-- empty div -->
+    <div class="col-md-4"></div>
+  </div>
+<div>
+  <div class="row" >
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3 class="text-center">Your projects</h3>
+      </div>
+      <div class="panel-body">
+          <div class="panel-body">
+            <!-- Looping through model   -->
+            <div class="row">
+              {% for project_item in projects %}
+                <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5" style="padding: 10px; margin: 30px; ">
+                  <!-- displaying title -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h2 class="text-center"> {{ project_item.title }}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class = "row">
+                          <div class = "col-md-12">
+                            <p> {{ project_item.project_details}}  </p>
+                              <hr>
+                          </div>
+                        </div>
+                        <div class = "row">
+                          <div class = "col-md-12">
+                            <p> <a href="/viewproject/{{project_item.id}}">View details about this project</a>  </p>
+                              <hr>
+                          </div>
+                        </div>
+                        <div class = "row">
+                          <div class = "col-md-12">
+                              <p> <span style="font-weight: bold;"> Rating: </span>{{ project_item.score }}</p>
+                              <hr>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+                        {% empty %}
+                        <div class="row">
+                          <div class="col-md-6">
+                          <h2 class="text-center">There are no projects to view currently</h2>
+                          </div>
+                          <hr>
+                        </div>
+        {% endfor %}
+            </div>
+  </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

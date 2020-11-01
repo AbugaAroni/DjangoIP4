@@ -1,7 +1,7 @@
 to do,
 
 create models,
-
+create user Sign
 
 Pages
 
@@ -18,13 +18,13 @@ Business search
 
 Models
 
-Negghtbourhood class
-Neighbourhood Name
+neighbourhood class
+neighbourhood Name
 Neighborhood location
 Occupants Count
 Admin Foreign key
 
-create_neigborhood()
+create_neighbourhoodd()
 delete_neigborhood()
 find_neigborhood(neigborhood_id)
 update_neighborhood()
