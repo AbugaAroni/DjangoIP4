@@ -31,3 +31,17 @@ class neighbourhood(models.Model):
     def update_neighborhood(self):
         name = self.name
         self.name = name
+
+class user(models.Model):
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
+    id = models.CharField(default=0)
+    nhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name.username
+
+    def save_user(self):
+        self.save()
+
+    def delete_user(self):
+        self.delete()
