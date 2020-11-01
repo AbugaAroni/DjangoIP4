@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.db import models
-from .models import neighbourhood, user, business
+from .models import neighbourhood, user, business, post
 from django.contrib.auth.models import User
 # Create your tests here.
 class NeighborhoodTestClass(TestCase):
@@ -135,3 +135,35 @@ class BusinessTestClass(TestCase):
         business_test = self.abugabusiness
         self.abugabusiness.update_business()
         self.assertEqual(business_test,self.abugabusiness)
+
+class PostTestClass(TestCase):
+        # Set up method
+    def setUp(self):
+        self.abuga = User(username="rick", password="password")
+        self.abuga.save()
+        self.neighbourhoodx= neighbourhood(name = "MC31", location= "langata", no_occupants = 1, admin = self.abuga)
+        self.neighbourhoodx.save()
+        self.abugauser = user(name = self.abuga, national_id=33333333, nhood = self.neighbourhoodx)
+        self.abugauser.save()
+
+        self.abugapost = post(title="carrefour closing down", user_name= self.abugauser, article= "carrefour@gmail.com is finally closing doown")
+
+    # Testing  instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.abugapost,post))
+
+    # Testing Save Method
+    def test_save_method(self):
+        self.abugapost.save_post()
+        testsaved = post.objects.all()
+        self.assertTrue(len(testsaved) > 0)
+
+    # Testing Delete Method
+    def test_delete_method(self):
+        self.abugapost.save_post()
+        testsaved = post.objects.all()
+        self.assertTrue(len(testsaved) > 0)
+
+        self.abugapost.delete_post()
+        testdelete = post.objects.filter(title="carrefour closing down")
+        self.assertEqual(len(testdelete), 0)

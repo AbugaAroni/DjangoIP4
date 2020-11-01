@@ -1,7 +1,8 @@
 to do,
 
 create models,
-create user Sign
+create user Sign,
+create my profile
 
 Pages
 
@@ -17,6 +18,11 @@ Business search
 
 
 Models
+
+Posts class
+Title
+user foreign key
+post_Name
 
 neighbourhood class
 neighbourhood Name

@@ -70,3 +70,18 @@ class business(models.Model):
     def update_business(self):
         name = self.name
         self.name = name
+
+# Create your models here.
+class post(models.Model):
+    title = models.CharField(max_length=50)
+    article = models.TextField()
+    user_name = models.ForeignKey(user,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
