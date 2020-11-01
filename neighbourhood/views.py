@@ -5,7 +5,7 @@ from django.urls import reverse
 from .models import neighbourhood, user, business, post
 from django.contrib.auth.models import User
 from django.db.models import Q
-from .forms import NewUserForm, NewNeighbourhoodForm
+from .forms import NewUserForm, NewNeighbourhoodForm, NewBusinessForm
 
 # Create your views here.
 def home(request):
@@ -45,6 +45,24 @@ def profile(request):
 @login_required(login_url='/accounts/login/')
 def new_neighbourhood(request):
     current_user=request.user
+    if request.method == 'POST':
+        form = NewNeighbourhoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            newhood = form.save(commit=False)
+            newhood.admin = current_user
+            newhood.save()
+        return redirect(profile)
+
+    else:
+        form = NewNeighbourhoodForm()
+    return render(request, 'new_neighbourhood.html', {"form": form})
+
+#add a new business
+@login_required(login_url='/accounts/login/')
+def new_business(request):
+    current_user=request.user
+    neighbourhoods_avail = neighbourhood.objects.all()
+
     if request.method == 'POST':
         form = NewNeighbourhoodForm(request.POST, request.FILES)
         if form.is_valid():
