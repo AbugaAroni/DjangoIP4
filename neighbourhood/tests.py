@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.db import models
-from .models import neighbourhood
+from .models import neighbourhood, user
 from django.contrib.auth.models import User
 # Create your tests here.
 class NeighborhoodTestClass(TestCase):
@@ -55,3 +55,33 @@ class NeighborhoodTestClass(TestCase):
         nhood_test = self.neighbourhood
         self.neighbourhood.update_neighborhood()
         self.assertEqual(nhood_test,self.neighbourhood)
+
+class userTestClass(TestCase):
+        # Set up method
+    def setUp(self):
+        self.abuga = User(username="rick", password="password")
+        self.abuga.save()
+        self.neighbourhood= neighbourhood(name = "MC31", location= "langata", no_occupants = 1, admin = self.abuga)
+        self.neighbourhood.save()
+
+        self.abugauser = user(name = self.abuga, national_id=33333333, nhood = self.neighbourhood)
+
+    # Testing  instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.abugauser,user))
+
+    # Testing Save Method
+    def test_save_method(self):
+        self.abugauser.save_user()
+        testsaved = user.objects.all()
+        self.assertTrue(len(testsaved) > 0)
+
+    # Testing Delete Method
+    def test_delete_method(self):
+        self.abugauser.save_user()
+        testsaved = user.objects.all()
+        self.assertTrue(len(testsaved) > 0)
+
+        self.abugauser.delete_user()
+        testdelete = user.objects.filter(name=self.abuga)
+        self.assertEqual(len(testdelete), 0)

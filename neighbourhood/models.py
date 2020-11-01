@@ -34,7 +34,7 @@ class neighbourhood(models.Model):
 
 class user(models.Model):
     name = models.ForeignKey(User,on_delete=models.CASCADE)
-    id = models.CharField(default=0)
+    national_id = models.CharField(max_length=20)
     nhood = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
 
     def __str__(self):
