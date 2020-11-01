@@ -1,6 +1,6 @@
 from django.test import TestCase
-from models import neighborhood
 from django.db import models
+from .models import neighbourhood
 from django.contrib.auth.models import User
 # Create your tests here.
 class NeighborhoodTestClass(TestCase):
@@ -8,7 +8,7 @@ class NeighborhoodTestClass(TestCase):
     def setUp(self):
         self.abuga = User(username="rick", password="password")
         self.abuga.save()
-        self.neighbourhood= Neighbourhood(name = "MC31", location= "langata", no_occupants = 1, admin = self.abuga)
+        self.neighbourhood= neighbourhood(name = "MC31", location= "langata", no_occupants = 1, admin = self.abuga)
 
     # Testing  instance
     def test_instance(self):
