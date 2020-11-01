@@ -1,11 +1,20 @@
 to do,
 
-create models,
-create user Sign,
-create my profile
-  add Neighrbourhood
-  add your profile
-  add forms for Neighrbourhood and user
+create models,*
+create user Sign,*
+create my profile*
+  add neighbourhood*
+  add your profile*
+  add forms for neighbourhood and user*
+
+edit/update neighbourhood
+view neighbourhood notice
+view all neighbourhoods to pick emergency_service
+emergency_services for given neighbourhood
+view posts and from given neighbourhood
+  view emergency_services
+Business search
+change my neighbourhood page
 
 Pages
 
@@ -29,25 +38,25 @@ post_Name
 
 neighbourhood class
 neighbourhood Name
-Neighborhood location
+neighbourhood location
 Occupants Count
 Admin Foreign key
 
 create_neighbourhoodd()
 delete_neigborhood()
 find_neigborhood(neigborhood_id)
-update_neighborhood()
+update_neighbourhood()
 update_occupants()
 
 User class
 Name,
 ID (national ID)
-Neighrbourhood foreignkey
+ foreignkey
 
 Business class
 Name,
 User foreign foreignkey
-Neighborhood foreignkey
+neighbourhood foreignkey
 Business email address
 
 create_business()
@@ -66,7 +75,7 @@ def profile(request):
     except posts.DoesNotExist:
         userposts = ""
     try:
-        userhood = neighborhood.objects.get(username=current_user)
+        userhood = neighbourhood.objects.get(username=current_user)
     except Profile.DoesNotExist:
         profiles = ""
 
