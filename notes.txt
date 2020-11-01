@@ -1,0 +1,42 @@
+Pages
+
+User sign in
+Set up profile
+FInd contact information for authorities in neighbourhood
+Profile Pages
+  change my neighbourhood
+view single neighbourhood details
+
+Features
+Business search
+
+
+Models
+
+Negghtbourhood class
+Neighbourhood Name
+Neighborhood location
+Occupants Count
+Admin Foreign key
+
+create_neigborhood()
+delete_neigborhood()
+find_neigborhood(neigborhood_id)
+update_neighborhood()
+update_occupants()
+
+User class
+Name,
+ID (national ID)
+Neighrbourhood foreignkey
+
+Business class
+Name,
+User foreign foreignkey
+Neighborhood foreignkey
+Business email address
+
+create_business()
+delete_business()
+find_business(business_id)
+update_business()
