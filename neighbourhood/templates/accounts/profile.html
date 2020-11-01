@@ -15,9 +15,9 @@
         <div class="panel-heading">
           <h3 class="text-center">Your profile</h3>
         </div>
-        {% if profiles == ""%}
+        {% if actual_user == ""%}
         <div class="panel-body">
-                  <p> You have not yet submitted a profile, please add one below. </p>
+                  <p> You have not yet submitted a profile and added your neighborhood, please add one below. </p>
           <form  action="{%url 'user_profile'%}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
 
@@ -58,7 +58,7 @@
           <div class="panel-body">
             <!-- Looping through model   -->
             <div class="row">
-              {% for p in posts %}
+              {% for p in userposts %}
                 <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5" style="padding: 10px; margin: 30px; ">
                   <!-- displaying title -->
                   <div class="panel panel-default">

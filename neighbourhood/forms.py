@@ -9,4 +9,4 @@ class NewNeighbourhoodForm(forms.ModelForm):
 class NewUserForm(forms.ModelForm):
     class Meta:
         model = user
-        exclude = ['nhood']        
+        exclude = ['name']  
