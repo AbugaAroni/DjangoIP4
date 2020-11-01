@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import neighbourhood, user, business
+from .models import neighbourhood, user, business, post
 from django.contrib.auth.models import User
 from django.db.models import Q
 from .forms import NewUserForm, NewNeighbourhoodForm
@@ -19,10 +19,13 @@ def profile(request):
         actual_user = user.objects.get(name=current_user)
     except user.DoesNotExist:
         actual_user = ""
-    try:
-        userposts = posts.objects.filter(Q(user_name=actual_user))
-    except posts.DoesNotExist:
+    if actual_user == "":
         userposts = ""
+    else:
+        try:
+            userposts = post.objects.filter(Q(user_name=actual_user))
+        except post.DoesNotExist:
+            userposts = ""
 
     if request.method == 'POST':
         form = NewUserForm(request.POST, request.FILES)
@@ -33,7 +36,7 @@ def profile(request):
         return redirect(profile)
 
     else:
-        form = NewNeighbourhoodForm()
+        form = NewUserForm()
     return render(request, 'accounts/profile.html', {"form": form, "userposts":userposts,  "actual_user":actual_user})
 
 #add a new neighbourhood
@@ -46,7 +49,7 @@ def new_neighbourhood(request):
             newhood = form.save(commit=False)
             newhood.admin = current_user
             newhood.save()
-        return redirect(new_neighbourhood)
+        return redirect(profile)
 
     else:
         form = NewNeighbourhoodForm()

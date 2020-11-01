@@ -17,7 +17,7 @@
         </div>
         {% if actual_user == ""%}
         <div class="panel-body">
-                  <p> You have not yet submitted a profile and added your neighborhood, please add one below. </p>
+                  <p> You have not yet submitted a profile and added your neighborhood, please complete the form below. </p>
           <form  action="{%url 'user_profile'%}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
 
@@ -29,16 +29,13 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-12">
-              <p><span style="font-weight: bold;"> Bio: </span> {{profiles.bio}} </p>
+              <p><span style="font-weight: bold;"> Your ID: </span> {{actual_user.national_id}} </p>
               <hr>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <p><span style="font-weight: bold;"> Contact info: </span> {{profiles.contactinfo}}</p>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <img src="{{profiles.user_image.url}}" class="img-responsive" alt="Image">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <p><span style="font-weight: bold;"> Your neighbourhood: </span> neighrbourhood and link</p>
             </div>
           </div>
           </div>
