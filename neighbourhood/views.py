@@ -10,20 +10,24 @@ from .forms import NewUserForm, NewNeighbourhoodForm, NewBusinessForm, NewPostFo
 # Create your views here.
 def home(request):
     current_user=request.user
-    try:
-        actual_user = user.objects.get(name=current_user)
-    except user.DoesNotExist:
-        actual_user = ""
-    if actual_user == "":
+    if request.user.is_anonymous:
         neighhood = ""
         posts = ""
     else:
         try:
-            neighhood = neighbourhood.objects.get(id=actual_user.nhood.id)
-            posts = post.objects.filter(Q(nhoodz=neighhood))
-        except post.DoesNotExist:
-            neighhood = post.objects.filter(Q(user_name=actual_user))
+            actual_user = user.objects.get(name=current_user)
+        except user.DoesNotExist:
+            actual_user = ""
+        if actual_user == "":
+            neighhood = ""
             posts = ""
+        else:
+            try:
+                neighhood = neighbourhood.objects.get(id=actual_user.nhood.id)
+                posts = post.objects.filter(Q(nhoodz=neighhood))
+            except post.DoesNotExist:
+                neighhood = post.objects.filter(Q(user_name=actual_user))
+                posts = ""
     return render(request, 'homepage.html', {"posts":posts, "neighbourhood":neighhood, "posts": posts})
 
 @login_required(login_url='/accounts/login/')
