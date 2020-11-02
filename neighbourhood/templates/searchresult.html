@@ -3,46 +3,50 @@
 <div class="container">
 
   <div class="row">
-    {% if projects%}
-      <h2>Found {{ projects|length }} of searched term {{message}}</h2>
+    {% if biz%}
+      <h2>Found {{ biz|length }} of searched term {{message}}</h2>
       <hR>
     {% else %}
-      <h2> Found 0 projects for the search term {{message}}</h2>
-      <p> Make sure you are searching for project titles </p>
+      <h2> Found 0 businesses for the search term {{message}}</h2>
+      <p> Make sure you are searching for business titles </p>
       <hr>
     {% endif %}
 
   </div>
 
   <div class="row">
-
-  {% if projects %}
-    {% for p in projects %}
+  {% if biz %}
+    {% for b in biz %}
   <div class="row">
     <div class="col-md-6">
    </div>
    <div class="col-md-6">
      <div class="row">
        <div class="col-md-12">
-         <h1 class="text-center">{{p.title}}</h1>
+         <h1 class="text-center">{{b.name}}</h1>
          <hr>
        </div>
        <div class="col-md-12">
-         <p><span style="font-weight: bold;">Description:</span> <span style="font-style: italic">{{p.project_details}}</span></p>
+         <p><span style="font-weight: bold;">Email:</span> <span style="font-style: italic">{{b.business_email}}</span></p>
        </div>
-       <div class="col-md-12">
-         <p style="text-align: right;"><span style="font-weight: bold;">Creator</span> <span style="font-style: italic"><span style="font-weight: bold;"> More from the Author: </span><a href="authorprofile/{{p.creator.id}}">{{ p.creator.username }}</a></span></p>
+       <div class = "col-md-12">
+         {% if b.emergency_service == True %}
+         <p>{{b.name}} is an <span style="text-decoration: underline;">Emergency service</span> </p>
+         {% else %}
+           <p>{{b.name}} is not an Emergency service</p>
+         {% endif %}
+           <hr>
        </div>
-       <div class="col-md-12">
-         <p style="text-align: right;"><span style="font-weight: bold;">Ratings:</span> <span style="font-style: italic">{{p.score}}/10</span></p>
-       </div>
-       <div class="col-md-12">
-         <p style="text-align: right;"><span style="font-weight: bold;"></span> <span style="font-style: italic"><a href="/viewproject/{{p.id}}">View more and rate this project</a></span></p>
+       <div class = "row">
+         <div class = "col-md-12">
+             <p> <span style="font-weight: bold;">Submitted by: </span> {{b.user_owner.name}}</p>
+             <hr>
+         </div>
        </div>
      </div>
    </div>
    </div>
-   <hr>
+   <hr><hr>
     {% endfor %}
   {% endif %}
   </div>

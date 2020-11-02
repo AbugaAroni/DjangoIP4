@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your models here.
 class neighbourhood(models.Model):
@@ -67,6 +68,11 @@ class business(models.Model):
         biz = cls.objects.get(id = busid)
         return biz
 
+    @classmethod
+    def search_by_title(cls,search_term, id):
+        img = cls.objects.filter(Q(name__icontains=search_term, nhood=id))
+        return img
+
     def update_business(self):
         name = self.name
         self.name = name
@@ -76,7 +82,7 @@ class post(models.Model):
     title = models.CharField(max_length=50)
     article = models.TextField()
     user_name = models.ForeignKey(user,on_delete=models.CASCADE)
-    nhoodz = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)    
+    nhoodz = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

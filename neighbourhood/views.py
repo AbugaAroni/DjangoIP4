@@ -147,7 +147,6 @@ def single_neighbourhood(request, nhood_id):
         posts = ""
     return render(request, 'single_neighbourhood.html', {"posts":posts, "neighbourhood":neighhood})
 
-
 def all_neighbourhoods(request):
     neighhood = neighbourhood.objects.all()
     return render(request, 'view_allneighbourhoods.html', {"neighbourhood":neighhood})
@@ -156,13 +155,14 @@ def all_neighbourhoods(request):
 def search_results(request):
     neighhood = neighbourhood.objects.all()
 
-    if 'neighbourhood_search' in request.GET and request.GET["neighbourhood_search"]:
-        search_term = request.GET.get("neighbourhood_search")
-        searched_images = Blog_Images.search_by_title(search_term)
+    if 'business_search' in request.GET and request.GET["business_search"]:
+        search_term = request.GET.get("business_search")
+        nhoodid = request.GET.get("neighbourhood")
+        searched_businesses = business.search_by_title(search_term, nhoodid)
         message = f"{search_term}"
 
-        return render(request, 'everything/search.html',{"message":message,"imgs": searched_images})
+        return render(request, 'searchresult.html',{"message":message,"biz": searched_businesses})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'everything/search.html',{"message":message})
+        return render(request, 'searchresult.html',{"message":message})
