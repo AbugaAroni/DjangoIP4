@@ -5,7 +5,7 @@ from django.urls import reverse
 from .models import neighbourhood, user, business, post
 from django.contrib.auth.models import User
 from django.db.models import Q
-from .forms import NewUserForm, NewNeighbourhoodForm, NewBusinessForm, NewPostForm
+from .forms import NewUserForm, NewNeighbourhoodForm, NewBusinessForm, NewPostForm, ChangeNeighbourhoodForm
 
 # Create your views here.
 def home(request):
@@ -121,7 +121,6 @@ def new_post(request):
         form = NewPostForm()
     return render(request, 'new_post.html', {"form": form, "actual_user": actual_user, "neighbourhoods_avail":neighbourhoods_avail})
 
-
 def all_businesses(request, nhood_id):
     neighhood = neighbourhood.objects.get(id = nhood_id)
     try:
@@ -166,3 +165,19 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'searchresult.html',{"message":message})
+
+#add a new neighbourhood
+@login_required(login_url='/accounts/login/')
+def change_neighbourhood(request):
+    current_user=request.user
+    actual_user = user.objects.get(name=current_user)
+    if request.method == 'POST':
+        form = ChangeNeighbourhoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            newhood = form.save(commit=False)
+            actual_user.change_hood(actual_user.id, newhood.nhood)
+        return redirect(profile)
+
+    else:
+        form = ChangeNeighbourhoodForm()
+    return render(request, 'change_neighbourhood.html', {"form": form})

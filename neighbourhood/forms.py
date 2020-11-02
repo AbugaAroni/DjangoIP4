@@ -20,3 +20,8 @@ class NewPostForm(forms.ModelForm):
     class Meta:
         model = post
         exclude = ['user_name']
+
+class ChangeNeighbourhoodForm(forms.ModelForm):
+    class Meta:
+        model = user
+        exclude = ['name', 'national_id']

@@ -47,6 +47,11 @@ class user(models.Model):
     def delete_user(self):
         self.delete()
 
+    @classmethod
+    def change_hood(cls,iduser,newhood):
+        cls.objects.filter(id=iduser).update(nhood = newhood)
+
+
 class business(models.Model):
     name = models.CharField(max_length=20)
     user_owner = models.ForeignKey(user,on_delete=models.CASCADE)

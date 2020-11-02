@@ -17,8 +17,12 @@
                 <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My neighbourhood <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="/">View my neighbourhood |</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="{%url 'all_neighbourhoods'%}">View all neighbourhoods</a></li>
+                  <li><a href="{%url 'all_neighbourhoods'%}">View all neighbourhoods |</a></li>
+                  {% if user.is_authenticated %}
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'change_neighbourhood'%}">Change your neighbourhood</a></li>
+                  {% else %}
+                  {% endif %}
                 </ul>
               </li>
             {% if user.is_authenticated %}
@@ -28,8 +32,6 @@
                     <li><a href="{% url 'add_neighbourhood'%}">Add a neighbourhood |</a></li>
                     <li><a href="{% url 'new_business'%}">Add a business |</a></li>
                     <li><a href="{% url 'new_post'%}">Add a notice |</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Change your neighbourhood</a></li>
                   </ul>
                 </li>
             {% else %}

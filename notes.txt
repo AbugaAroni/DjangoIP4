@@ -14,8 +14,12 @@ emergency_services for given neighbourhood*
 
 view all neighbourhoods*
 view posts and from given neighbourhood*
-Business search
+Business search*
 change my neighbourhood page
+  form
+  url
+  view
+  
 
 Pages
 
