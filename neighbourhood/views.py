@@ -84,6 +84,8 @@ def new_business(request):
 @login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user=request.user
+    neighbourhoods_avail = neighbourhood.objects.all()
+
     try:
         actual_user = user.objects.get(name=current_user)
     except user.DoesNotExist:
@@ -93,11 +95,11 @@ def new_post(request):
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
             newhood = form.save(commit=False)
-            newhood.user_owner = actual_user
+            newhood.user_name = actual_user
             newhood.save()
         #redirect to the neighrboud hood post
-        return redirect()
+        return redirect(new_post)
 
     else:
         form = NewPostForm()
-    return render(request, 'new_post.html', {"form": form, "actual_user": actual_user})
+    return render(request, 'new_post.html', {"form": form, "actual_user": actual_user, "neighbourhoods_avail":neighbourhoods_avail})

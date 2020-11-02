@@ -15,15 +15,26 @@
         <div class="panel-heading">
           <h3 class="text-center">Submit a new notice</h3>
         </div>
-        <div class="panel-body">
-    <form  action="{%url 'add_post'%}" method="post" enctype="multipart/form-data">
-      {%csrf_token%}
+        {% if not neighbourhoods_avail%}
+            <div class="panel-body">
+              <p>Please <a href="{% url 'add_neighbourhood'%}">submit a Neighbourhood</a> (and by extension a <a href="url 'user_profile'">user profile</a>) before adding a business</p>
+            </div>
+        {%else%}
+              {% if actual_user == ""%}
+                  <div class="panel-body">
+                    <p>Please <a href="{% url 'user_profile'%}">submit a User profile</a> before adding a business</p>
+                  </div>
+              {%else%}
+              <div class="panel-body">
+                <form  action="{%url 'new_post'%}" method="post" enctype="multipart/form-data">
+                  {%csrf_token%}
 
-      {% bootstrap_form form%}
-      <input type="submit" class="btn btn-success btn-lg" value="Post">
-    </form>
-        </div>
-
+                  {% bootstrap_form form%}
+                  <input type="submit" class="btn btn-success btn-lg" value="Post">
+                </form>
+              </div>
+                {%endif%}
+          {%endif%}
       </div>
 
     </div>
