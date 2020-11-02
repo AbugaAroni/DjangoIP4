@@ -126,3 +126,12 @@ def all_businesses(request, nhood_id):
     except business.DoesNotExist:
         biz = ""
     return render(request, 'all_businesses.html', {"biz":biz, "neighbourhood":neighhood})
+
+@login_required(login_url='/accounts/login/')
+def emergency_services(request, nhood_id):
+    neighhood = neighbourhood.objects.get(id = nhood_id)
+    try:
+        biz = business.objects.filter(Q(nhood = neighhood))
+    except business.DoesNotExist:
+        biz = ""
+    return render(request, 'emergency_services.html', {"biz":biz, "neighbourhood":neighhood})

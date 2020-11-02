@@ -1,0 +1,90 @@
+{%extends 'base0.html'%}
+
+{% block content %}
+{{block.super}}
+
+<div class="container">
+
+  <!-- view your neighbourhood   -->
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+      <div class = "col-xs-8 col-sm-12 col-md-5 col-lg-5" >
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-center"> All emergency service businesses from <span style="font-weight: bold;">{{ neighbourhood.name }} </span></h2>
+          </div>
+          <div class="panel-body">
+          <div>
+            <div class = "row">
+              <div class = "col-md-12">
+                <p><span style="font-weight: bold;">Location: </span> {{ neighbourhood.location}}  </p>
+                  <hr>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class = "row">
+              <div class = "col-md-12">
+                <p>View<a href="/all/businesses/neighbourhood/{{neighbourhood.id}}"> all businesses</a> </p>
+                  <hr>
+              </div>
+            </div>
+          </div>
+            </div>
+        </div>
+     </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6">
+    <h1 style="text-decoration: underline; text-align: center"> All emergency service businesses in the {{neighbourhood.name}} area </h1>
+      </div>
+  <div class="col-md-3">
+      </div>
+</div>
+  <div class="row">
+    {% for b in biz %}
+    {% if b.emergency_service == True %}
+              <div class="col-xs-8 col-sm-12 col-md-5 col-lg-5" style="padding: 10px; margin: 30px; border-bottom-style: double; height: 500px; ">
+                <!-- displaying title -->
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h2 class="text-center"> {{ b.name }}</h2>
+                  </div>
+                  <div class="panel-body">
+                  <div>
+                    <div class = "row">
+                      <div class = "col-md-12">
+                        <p><span style="font-weight: bold;"> Email address: </span> {{ b.business_email}}  </p>
+                          <hr>
+                      </div>
+                    </div>
+                      <div class = "row">
+                        <div class = "col-md-12">
+                            <p> <span style="font-weight: bold;">Submitted by: </span> {{b.user_owner.name}}</p>
+                            <hr>
+                        </div>
+                      </div>
+                      <div>
+                      </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+      {% else %}
+     {% endif %}
+      {%empty%}
+      <div class="col-md-6">
+      <h2 class="text-center" style="font-style: italics;">There are no emergency service businesses to view currently, please <a href="{%url 'new_business' %}">add some</a></h2>
+      </div>
+      <hr>
+            {% endfor %}
+        </div>
+  <!-- Looping through posts model   -->
+  </div>
+
+{% endblock %}

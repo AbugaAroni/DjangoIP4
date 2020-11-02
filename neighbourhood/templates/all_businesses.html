@@ -6,7 +6,7 @@
 <div class="container">
 
   <!-- view your neighbourhood   -->
-  {% if neighbourhood == ""%}
+  {% if not neighbourhood %}
       <div class="panel-body">
         <p>You don't have a neighbourhood yet, please <a href="{% url 'user_profile'%}">add a Neighbourhood</a>  to your profile </p>
       </div>
@@ -31,7 +31,7 @@
           <div>
             <div class = "row">
               <div class = "col-md-12">
-                <p>View<a href=""> all emergency services</a> </p>
+                <p>View<a href="/all/emergencyservices/neighbourhood/{{neighbourhood.id}}"> all emergency services</a> </p>
                   <hr>
               </div>
             </div>
@@ -63,7 +63,7 @@
           <div>
             <div class = "row">
               <div class = "col-md-12">
-                <p> {{ b.business_email}}  </p>
+                <p><span style="font-weight: bold;"> Email address: </span>  {{ b.business_email}}  </p>
                   <hr>
               </div>
             </div>
@@ -91,7 +91,7 @@
       </div>
               {% empty %}
                 <div class="col-md-6">
-                <h2 class="text-center" style="font-style: italics;">There are no businesses to view currently, please <a href="{%url new_business%}">add some</a></h2>
+                <h2 class="text-center" style="font-style: italics;">There are no businesses to view currently, please <a href="{%url 'new_business' %}">add some</a></h2>
                 </div>
                 <hr>
             {% endfor %}
