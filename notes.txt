@@ -7,8 +7,6 @@ create my profile*
   add your profile*
   add forms for neighbourhood and user*
 
-edit/update neighbourhood
-view neighbourhood notice
 view all neighbourhoods to pick emergency_service
 emergency_services for given neighbourhood
 view posts and from given neighbourhood

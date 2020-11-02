@@ -76,6 +76,7 @@ class post(models.Model):
     title = models.CharField(max_length=50)
     article = models.TextField()
     user_name = models.ForeignKey(user,on_delete=models.CASCADE)
+    nhoodz = models.ForeignKey(neighbourhood,on_delete=models.CASCADE)    
 
     def __str__(self):
         return self.title
