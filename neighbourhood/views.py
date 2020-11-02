@@ -117,3 +117,12 @@ def new_post(request):
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {"form": form, "actual_user": actual_user, "neighbourhoods_avail":neighbourhoods_avail})
+
+@login_required(login_url='/accounts/login/')
+def all_businesses(request, nhood_id):
+    neighhood = neighbourhood.objects.get(id = nhood_id)
+    try:
+        biz = business.objects.filter(Q(nhood = neighhood))
+    except business.DoesNotExist:
+        biz = ""
+    return render(request, 'all_businesses.html', {"biz":biz, "neighbourhood":neighhood})

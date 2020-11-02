@@ -7,7 +7,7 @@ create my profile*
   add your profile*
   add forms for neighbourhood and user*
 
-view my neighbourhoods
+view my neighbourhoods*
   -emergency_services link
   -view notices
 emergency_services for given neighbourhood
