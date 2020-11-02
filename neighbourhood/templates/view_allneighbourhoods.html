@@ -1,0 +1,37 @@
+{%extends 'base0.html'%}
+
+{% block content %}
+{{block.super}}
+
+<div class="container">
+
+  <!-- view your neighbourhood   -->
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+      <div class = "col-xs-8 col-sm-12 col-md-6 col-lg-6" >
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="text-center"> All Neighbourhoods</h2>
+          </div>
+          <div class="panel-body">
+          {% for n in neighbourhood %}
+            <div class = "row">
+              <div class = "col-md-6">
+                <p><span style="font-weight: bold;">Name: </span> {{ n.name}} </p>
+                <p><span style="font-weight: bold;">Location: </span> {{ n.location}} </p>
+                <p>View<a href="/neighbourhood/{{neighbourhood.id}}"> {{n.name}} neighbourhood</a> </p>
+                  <hr>
+              </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+     </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+  <!-- Looping through posts model   -->
+  </div>
+
+{% endblock %}

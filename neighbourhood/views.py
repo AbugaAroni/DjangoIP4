@@ -135,3 +135,26 @@ def emergency_services(request, nhood_id):
     except business.DoesNotExist:
         biz = ""
     return render(request, 'emergency_services.html', {"biz":biz, "neighbourhood":neighhood})
+
+def single_neighbourhood(request, nhood_id):
+    current_user=request.user
+    try:
+        actual_user = user.objects.get(name=current_user)
+    except user.DoesNotExist:
+        actual_user = ""
+    if actual_user == "":
+        neighhood = ""
+        posts = ""
+    else:
+        try:
+            neighhood = neighbourhood.objects.get(id=actual_user.nhood.id)
+            posts = post.objects.filter(Q(nhoodz=neighhood))
+        except post.DoesNotExist:
+            neighhood = post.objects.filter(Q(user_name=actual_user))
+            posts = ""
+    return render(request, 'homepage.html', {"posts":posts, "neighbourhood":neighhood, "posts": posts})
+
+@login_required(login_url='/accounts/login/')
+def all_neighbourhoods(request):
+    neighhood = neighbourhood.objects.all()
+    return render(request, 'view_allneighbourhoods.html', {"neighbourhood":neighhood})
