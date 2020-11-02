@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if projects%}
+      <h2>Found {{ projects|length }} of searched term {{message}}</h2>
+      <hR>
+    {% else %}
+      <h2> Found 0 projects for the search term {{message}}</h2>
+      <p> Make sure you are searching for project titles </p>
+      <hr>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if projects %}
+    {% for p in projects %}
+  <div class="row">
+    <div class="col-md-6">
+   </div>
+   <div class="col-md-6">
+     <div class="row">
+       <div class="col-md-12">
+         <h1 class="text-center">{{p.title}}</h1>
+         <hr>
+       </div>
+       <div class="col-md-12">
+         <p><span style="font-weight: bold;">Description:</span> <span style="font-style: italic">{{p.project_details}}</span></p>
+       </div>
+       <div class="col-md-12">
+         <p style="text-align: right;"><span style="font-weight: bold;">Creator</span> <span style="font-style: italic"><span style="font-weight: bold;"> More from the Author: </span><a href="authorprofile/{{p.creator.id}}">{{ p.creator.username }}</a></span></p>
+       </div>
+       <div class="col-md-12">
+         <p style="text-align: right;"><span style="font-weight: bold;">Ratings:</span> <span style="font-style: italic">{{p.score}}/10</span></p>
+       </div>
+       <div class="col-md-12">
+         <p style="text-align: right;"><span style="font-weight: bold;"></span> <span style="font-style: italic"><a href="/viewproject/{{p.id}}">View more and rate this project</a></span></p>
+       </div>
+     </div>
+   </div>
+   </div>
+   <hr>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

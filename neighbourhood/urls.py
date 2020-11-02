@@ -11,4 +11,5 @@ urlpatterns=[
     re_path('all/businesses/neighbourhood/(\d+)',views.all_businesses,name ='all_businesses'),
     re_path('all/emergencyservices/neighbourhood/(\d+)',views.emergency_services, name ='emergency_services'),
     re_path('neighbourhood/(\d+)',views.single_neighbourhood, name ='single_neighbourhood'),
+    re_path('search/', views.search_results, name='search_results'),    
 ]

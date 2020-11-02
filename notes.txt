@@ -12,8 +12,8 @@ view my neighbourhoods*
   -view notices*
 emergency_services for given neighbourhood*
 
-view all neighbourhoods
-view posts and from given neighbourhood
+view all neighbourhoods*
+view posts and from given neighbourhood*
 Business search
 change my neighbourhood page
 

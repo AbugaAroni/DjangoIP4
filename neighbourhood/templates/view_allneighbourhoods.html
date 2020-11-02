@@ -15,16 +15,17 @@
             <h2 class="text-center"> All Neighbourhoods</h2>
           </div>
           <div class="panel-body">
+                      <div class = "row">
           {% for n in neighbourhood %}
-            <div class = "row">
               <div class = "col-md-6">
                 <p><span style="font-weight: bold;">Name: </span> {{ n.name}} </p>
                 <p><span style="font-weight: bold;">Location: </span> {{ n.location}} </p>
                 <p>View<a href="/neighbourhood/{{n.id}}"> {{n.name}} neighbourhood</a> </p>
                   <hr>
               </div>
-            </div>
+
             {% endfor %}
+                    </div>
             </div>
         </div>
      </div>

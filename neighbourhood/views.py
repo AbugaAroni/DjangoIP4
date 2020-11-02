@@ -147,3 +147,18 @@ def single_neighbourhood(request, nhood_id):
 def all_neighbourhoods(request):
     neighhood = neighbourhood.objects.all()
     return render(request, 'view_allneighbourhoods.html', {"neighbourhood":neighhood})
+
+@login_required(login_url='/accounts/login/')
+def search_results(request):
+    neighhood = neighbourhood.objects.all()
+
+    if 'neighbourhood_search' in request.GET and request.GET["neighbourhood_search"]:
+        search_term = request.GET.get("neighbourhood_search")
+        searched_images = Blog_Images.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'everything/search.html',{"message":message,"imgs": searched_images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'everything/search.html',{"message":message})
