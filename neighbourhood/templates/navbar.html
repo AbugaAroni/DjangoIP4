@@ -13,16 +13,15 @@
     </div>
    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-left">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My neighbourhood <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/">View my neighbourhood |</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{%url 'all_neighbourhoods'%}">View all neighbourhoods</a></li>
+                </ul>
+              </li>
             {% if user.is_authenticated %}
-
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My neighbourhood <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/">View my neighbourhood |</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="{%url 'all_neighbourhoods'%}">View all neighbourhoods</a></li>
-                  </ul>
-                </li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add new ... <span class="caret"></span></a>
                   <ul class="dropdown-menu">

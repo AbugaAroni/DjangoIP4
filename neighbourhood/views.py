@@ -121,7 +121,7 @@ def new_post(request):
         form = NewPostForm()
     return render(request, 'new_post.html', {"form": form, "actual_user": actual_user, "neighbourhoods_avail":neighbourhoods_avail})
 
-@login_required(login_url='/accounts/login/')
+
 def all_businesses(request, nhood_id):
     neighhood = neighbourhood.objects.get(id = nhood_id)
     try:
@@ -130,7 +130,7 @@ def all_businesses(request, nhood_id):
         biz = ""
     return render(request, 'all_businesses.html', {"biz":biz, "neighbourhood":neighhood})
 
-@login_required(login_url='/accounts/login/')
+
 def emergency_services(request, nhood_id):
     neighhood = neighbourhood.objects.get(id = nhood_id)
     try:
@@ -138,7 +138,7 @@ def emergency_services(request, nhood_id):
     except business.DoesNotExist:
         biz = ""
     return render(request, 'emergency_services.html', {"biz":biz, "neighbourhood":neighhood})
-@login_required(login_url='/accounts/login/')
+
 def single_neighbourhood(request, nhood_id):
     neighhood = neighbourhood.objects.get(id = nhood_id)
     try:
@@ -147,7 +147,7 @@ def single_neighbourhood(request, nhood_id):
         posts = ""
     return render(request, 'single_neighbourhood.html', {"posts":posts, "neighbourhood":neighhood})
 
-@login_required(login_url='/accounts/login/')
+
 def all_neighbourhoods(request):
     neighhood = neighbourhood.objects.all()
     return render(request, 'view_allneighbourhoods.html', {"neighbourhood":neighhood})
