@@ -89,7 +89,7 @@ def new_business(request):
             newhood.user_owner = actual_user
             newhood.save()
         #redirect to the specific neighbourhood
-        return redirect(new_business)
+        return HttpResponseRedirect(reverse("single_neighbourhood", args=[newhood.nhood.id]))
 
     else:
         form = NewBusinessForm()
@@ -112,7 +112,7 @@ def new_post(request):
             newhood.user_name = actual_user
             newhood.save()
         #redirect to the neighrboud hood post
-        return redirect(new_post)
+        return HttpResponseRedirect(reverse("single_neighbourhood", args=[newhood.nhood.id]))
 
     else:
         form = NewPostForm()
@@ -135,24 +135,14 @@ def emergency_services(request, nhood_id):
     except business.DoesNotExist:
         biz = ""
     return render(request, 'emergency_services.html', {"biz":biz, "neighbourhood":neighhood})
-
+@login_required(login_url='/accounts/login/')
 def single_neighbourhood(request, nhood_id):
-    current_user=request.user
+    neighhood = neighbourhood.objects.get(id = nhood_id)
     try:
-        actual_user = user.objects.get(name=current_user)
-    except user.DoesNotExist:
-        actual_user = ""
-    if actual_user == "":
-        neighhood = ""
+        posts = post.objects.filter(Q(nhoodz=neighhood))
+    except post.DoesNotExist:
         posts = ""
-    else:
-        try:
-            neighhood = neighbourhood.objects.get(id=actual_user.nhood.id)
-            posts = post.objects.filter(Q(nhoodz=neighhood))
-        except post.DoesNotExist:
-            neighhood = post.objects.filter(Q(user_name=actual_user))
-            posts = ""
-    return render(request, 'homepage.html', {"posts":posts, "neighbourhood":neighhood, "posts": posts})
+    return render(request, 'single_neighbourhood.html', {"posts":posts, "neighbourhood":neighhood})
 
 @login_required(login_url='/accounts/login/')
 def all_neighbourhoods(request):
