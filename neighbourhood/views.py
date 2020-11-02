@@ -116,7 +116,7 @@ def new_post(request):
             newhood.user_name = actual_user
             newhood.save()
         #redirect to the neighrboud hood post
-        return HttpResponseRedirect(reverse("single_neighbourhood", args=[newhood.nhood.id]))
+        return HttpResponseRedirect(reverse("single_neighbourhood", args=[newhood.nhoodz.id]))
 
     else:
         form = NewPostForm()

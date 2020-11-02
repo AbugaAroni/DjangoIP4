@@ -3,7 +3,7 @@
 ### Author: [Abuga Aroni] (https://github.com/AbugaAroni/)
 
 ### Description
-This is an application that will allow user to view business and notices in their neighbourhood. They can also add their own neighbourhood or change it if it doesn't exist.
+This is an application that will allow user to view business and notices in their neighbourhood. They can also add their own neighbourhood if it doesn't exist or simply change it.
 
 ### Features
 Users can sign up and sign in to the application to start using it.
