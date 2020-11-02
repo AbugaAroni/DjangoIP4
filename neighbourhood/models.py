@@ -29,6 +29,17 @@ class neighbourhood(models.Model):
         newcount = occupationcount.no_occupants + 1
         cls.objects.filter(id = hoodid).update(no_occupants = newcount)
 
+    @classmethod
+    def change_occupants(cls,hoodid,oldid):
+        #add occupants
+        occupationcount = cls.objects.get(id=hoodid)
+        newcount = occupationcount.no_occupants + 1
+        cls.objects.filter(id = hoodid).update(no_occupants = newcount)
+        #remove occupants
+        occupationcountw = cls.objects.get(id=oldid)
+        newcountw = occupationcountw.no_occupants - 1
+        cls.objects.filter(id = oldid).update(no_occupants = newcountw)
+
     def update_neighborhood(self):
         name = self.name
         self.name = name
@@ -49,7 +60,10 @@ class user(models.Model):
 
     @classmethod
     def change_hood(cls,iduser,newhood):
+        x  =  cls.objects.get(id=iduser)
+        neighbourhood.change_occupants(newhood.id,x.nhood.id)
         cls.objects.filter(id=iduser).update(nhood = newhood)
+
 
 
 class business(models.Model):

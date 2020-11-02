@@ -52,6 +52,7 @@ def profile(request):
             newuserprofile = form.save(commit=False)
             newuserprofile.name = current_user
             newuserprofile.save()
+            neighbourhood.update_occupants(newuserprofile.nhood.id)
         return redirect(profile)
 
     else:
@@ -170,7 +171,10 @@ def search_results(request):
 @login_required(login_url='/accounts/login/')
 def change_neighbourhood(request):
     current_user=request.user
-    actual_user = user.objects.get(name=current_user)
+    try:
+        actual_user = user.objects.get(name=current_user)
+    except user.DoesNotExist:
+        actual_user = ""
     if request.method == 'POST':
         form = ChangeNeighbourhoodForm(request.POST, request.FILES)
         if form.is_valid():
@@ -180,4 +184,4 @@ def change_neighbourhood(request):
 
     else:
         form = ChangeNeighbourhoodForm()
-    return render(request, 'change_neighbourhood.html', {"form": form})
+    return render(request, 'change_neighbourhood.html', {"form": form, "user": actual_user})
