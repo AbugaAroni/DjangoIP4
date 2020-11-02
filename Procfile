@@ -1,1 +1,1 @@
-web: gunicorn ip3.wsgi --log-file -
+web: gunicorn ip4.wsgi --log-file -
