@@ -7,10 +7,13 @@ create my profile*
   add your profile*
   add forms for neighbourhood and user*
 
-view all neighbourhoods to pick emergency_service
+view my neighbourhoods
+  -emergency_services link
+  -view notices
 emergency_services for given neighbourhood
+
+view all neighbourhoods
 view posts and from given neighbourhood
-  view emergency_services
 Business search
 change my neighbourhood page
 
