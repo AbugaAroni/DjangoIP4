@@ -30,7 +30,6 @@ def home(request):
 def profile(request):
     current_user=request.user
     neighbourhoods_avail = neighbourhood.objects.all()
-
     try:
         actual_user = user.objects.get(name=current_user)
     except user.DoesNotExist:
