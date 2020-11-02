@@ -69,7 +69,7 @@ def new_neighbourhood(request):
             newhood = form.save(commit=False)
             newhood.admin = current_user
             newhood.save()
-        return redirect(profile)
+        return redirect(all_neighbourhoods)
 
     else:
         form = NewNeighbourhoodForm()
