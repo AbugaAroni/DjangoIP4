@@ -25,9 +25,16 @@
    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-left">
             {% if user.is_authenticated %}
-                <li><a class="navbar-brand" href="/accounts/profile">My profile |</a></li>
-                <li><a class="navbar-brand" href="#">View my neighbourhood |</a></li>
-                <li><a class="navbar-brand" href="/accounts/logout">Logout |</a></li>
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My neighbourhood <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">View my neighbourhood |</a></li>
+                    <li><a href="#">View posts |</a></li>
+                    <li><a href="#">View essential services |</a></li>
+                  </ul>
+                </li>
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add new ... <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -37,7 +44,10 @@
                     <li role="separator" class="divider"></li>
                     <li><a href="#">Change your neighbourhood</a></li>
                   </ul>
-                </li>
+                </li>                
+
+                <li><a class="navbar-brand" href="/accounts/profile">My profile |</a></li>
+                <li><a class="navbar-brand" href="/accounts/logout">Logout |</a></li>
             {% else %}
                 <li><a class="navbar-brand" href="/accounts/login">Login |</a></li>
                 <li><a class="navbar-brand" href="/accounts/register">Sign up |</a></li>
